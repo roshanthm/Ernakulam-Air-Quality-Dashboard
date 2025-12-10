@@ -3,6 +3,7 @@
 A modern, interactive **Air Quality Monitoring Dashboard** for Ernakulam district, built using **pure HTML, CSS, and JavaScript**.  
 The application visualizes air pollution data in a clean, responsive, and government-grade UI—no backend or build tools required.
 
+**Live Demo:** [Check it out here](https://roshanthm.github.io/Ernakulam-Air-Quality-Dashboard/)  
 ---
 
 ## 📌 Overview
