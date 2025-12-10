@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ernakulam Air Quality Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1 class="header-title">Ernakulam Air Quality Dashboard</h1>
+                        <p class="header-subtitle">Climate Adaptation & Carbon Management System</p>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation" id="navigation">
+        <div class="container">
+            <div class="nav-tabs" id="navTabs">
+                <button class="nav-tab active" data-tab="overview">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Overview</span>
+                </button>
+                <button class="nav-tab" data-tab="map">
+                    <i class="fas fa-map"></i>
+                    <span>Map View</span>
+                </button>
+                <button class="nav-tab" data-tab="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </button>
+                <button class="nav-tab" data-tab="carbon">
+                    <i class="fas fa-tree"></i>
+                    <span>Green Cover</span>
+                </button>
+                <button class="nav-tab" data-tab="ai">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Predictions</span>
+                </button>
+                <button class="nav-tab" data-tab="citizen">
+                    <i class="fas fa-users"></i>
+                    <span>Citizen Portal</span>
+                </button>
+                <button class="nav-tab" data-tab="governance">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Governance</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <!-- Alert Banner -->
+                <div class="alert-banner">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="alert-text">
+                        <h3>High Pollution Alert</h3>
+                        <p>AQI levels elevated in Edappally and Palarivattom areas. Sensitive groups should limit outdoor activities.</p>
+                    </div>
+                </div>
+
+                <!-- Main AQI Display -->
+                <div class="aqi-main-card">
+                    <div class="aqi-main-grid">
+                        <div class="aqi-main-info">
+                            <p class="aqi-label">Current City-Wide AQI</p>
+                            <div class="aqi-value-row">
+                                <span class="aqi-value-large">87</span>
+                                <span class="aqi-badge aqi-moderate">Moderate</span>
+                            </div>
+                            <p class="aqi-updated">Last updated: 10 minutes ago</p>
+                        </div>
+                        <div class="aqi-metrics-grid">
+                            <div class="aqi-metric-card">
+                                <div class="metric-header">
+                                    <i class="fas fa-wind"></i>
+                                    <span>PM2.5</span>
+                                </div>
+                                <p class="metric-value">42</p>
+                                <p class="metric-unit">μg/m³</p>
+                            </div>
+                            <div class="aqi-metric-card">
+                                <div class="metric-header">
+                                    <i class="fas fa-wind"></i>
+                                    <span>PM10</span>
+                                </div>
+                                <p class="metric-value">87</p>
+                                <p class="metric-unit">μg/m³</p>
+                            </div>
+                            <div class="aqi-metric-card">
+                                <div class="metric-header">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <span>Temperature</span>
+                                </div>
+                                <p class="metric-value">28°C</p>
+                            </div>
+                            <div class="aqi-metric-card">
+                                <div class="metric-header">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Humidity</span>
+                                </div>
+                                <p class="metric-value">75%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ward-wise Summary -->
+                <div class="card">
+                    <h2>Ward-wise Air Quality Status</h2>
+                    <div class="ward-grid" id="wardGrid"></div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card stat-blue">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <h3>Monitoring</h3>
+                        </div>
+                        <p class="stat-value">18</p>
+                        <p class="stat-label">Active sensors citywide</p>
+                    </div>
+                    <div class="stat-card stat-green">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Coverage</h3>
+                        </div>
+                        <p class="stat-value">23.4%</p>
+                        <p class="stat-label">Of total city area</p>
+                    </div>
+                    <div class="stat-card stat-purple">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Engagement</h3>
+                        </div>
+                        <p class="stat-value">2,847</p>
+                        <p class="stat-label">Reports this month</p>
+                    </div>
+                </div>
+
+                <!-- AQI Scale Reference -->
+                <div class="card">
+                    <h2>AQI Scale Reference</h2>
+                    <div class="aqi-scale-grid">
+                        <div class="aqi-scale-item">
+                            <div class="aqi-scale-box aqi-scale-good">0-50</div>
+                            <p>Good</p>
+                        </div>
+                        <div class="aqi-scale-item">
+                            <div class="aqi-scale-box aqi-scale-moderate">51-100</div>
+                            <p>Moderate</p>
+                        </div>
+                        <div class="aqi-scale-item">
+                            <div class="aqi-scale-box aqi-scale-poor">101-200</div>
+                            <p>Poor</p>
+                        </div>
+                        <div class="aqi-scale-item">
+                            <div class="aqi-scale-box aqi-scale-very-poor">201-300</div>
+                            <p>Very Poor</p>
+                        </div>
+                        <div class="aqi-scale-item">
+                            <div class="aqi-scale-box aqi-scale-severe">300+</div>
+                            <p>Severe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Tab -->
+            <div class="tab-content" id="map">
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h2>Ward-wise Pollution Heatmap</h2>
+                            <p class="card-subtitle">Interactive visualization of air quality monitoring stations</p>
+                        </div>
+                        <div class="filter-control">
+                            <div class="filter-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <select id="zoneFilter" class="select-input">
+                                <option value="all">All Locations</option>
+                                <option value="traffic">Traffic Zones</option>
+                                <option value="industrial">Industrial Areas</option>
+                                <option value="residential">Residential Areas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="map-container" id="mapContainer">
+                        <svg id="mapSvg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                            <!-- Map content will be generated by JavaScript -->
+                        </svg>
+                        <div id="stationDetails" class="station-details hidden"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Monitoring Stations <span id="stationCount"></span></h2>
+                    <div class="station-grid" id="stationGrid"></div>
+                </div>
+
+                <div class="card">
+                    <h2>Map Legend</h2>
+                    <div class="legend-grid">
+                        <div class="legend-section">
+                            <p class="legend-title">AQI Color Coding</p>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-color good"></div>
+                                    <span>Good (0-50)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color moderate"></div>
+                                    <span>Moderate (51-100)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color poor"></div>
+                                    <span>Poor (101-200)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color very-poor"></div>
+                                    <span>Very Poor (201-300)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="legend-section">
+                            <p class="legend-title">Zone Types</p>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-zone traffic"></div>
+                                    <span>Traffic Zones</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-zone industrial"></div>
+                                    <span>Industrial Areas</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-zone residential"></div>
+                                    <span>Residential Areas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h2>Air Quality Analytics</h2>
+                            <p class="card-subtitle">Trends, comparisons, and environmental insights</p>
+                        </div>
+                        <div class="filter-control">
+                            <div class="filter-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <select id="timeRange" class="select-input">
+                                <option value="daily">Last 24 Hours</option>
+                                <option value="weekly">Last 7 Days</option>
+                                <option value="monthly">Last 12 Months</option>
+                            </select>
+                            <button class="btn-primary">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>AQI Trend Analysis</h2>
+                    <div class="chart-container">
+                        <canvas id="aqiTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Particulate Matter Levels (PM2.5 vs PM10)</h2>
+                    <div class="chart-container">
+                        <canvas id="pmComparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Ward-wise AQI Comparison (Weekly)</h2>
+                    <div class="chart-container">
+                        <canvas id="wardComparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h2>Primary Pollutant Contributors</h2>
+                        <div id="pollutantBars"></div>
+                    </div>
+                    <div class="card">
+                        <h2>Key Environmental Insights</h2>
+                        <div class="insights-list">
+                            <div class="insight-item insight-orange">
+                                <i class="fas fa-arrow-trend-up"></i>
+                                <div>
+                                    <p class="insight-title">High Traffic Impact</p>
+                                    <p class="insight-text">Edappally and Palarivattom show 40% higher AQI during peak hours (8-10 AM, 5-8 PM)</p>
+                                </div>
+                            </div>
+                            <div class="insight-item insight-blue">
+                                <i class="fas fa-arrow-trend-down"></i>
+                                <div>
+                                    <p class="insight-title">Weekend Improvement</p>
+                                    <p class="insight-text">AQI levels drop by average 25% on Sundays across all wards</p>
+                                </div>
+                            </div>
+                            <div class="insight-item insight-green">
+                                <i class="fas fa-cloud-rain"></i>
+                                <div>
+                                    <p class="insight-title">Monsoon Effect</p>
+                                    <p class="insight-text">Jun-Sep shows 30% better air quality due to rainfall and vegetation growth</p>
+                                </div>
+                            </div>
+                            <div class="insight-item insight-purple">
+                                <i class="fas fa-building"></i>
+                                <div>
+                                    <p class="insight-title">Industrial Zones</p>
+                                    <p class="insight-text">Kakkanad IT corridor maintains moderate AQI with planned green spaces</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid stats-grid-4">
+                    <div class="stat-card stat-blue">
+                        <p class="stat-label">Average City AQI</p>
+                        <p class="stat-value">87</p>
+                        <p class="stat-sublabel">Last 30 days</p>
+                    </div>
+                    <div class="stat-card stat-green">
+                        <p class="stat-label">Best Ward</p>
+                        <p class="stat-value">52</p>
+                        <p class="stat-sublabel">Marine Drive</p>
+                    </div>
+                    <div class="stat-card stat-orange">
+                        <p class="stat-label">Needs Attention</p>
+                        <p class="stat-value">112</p>
+                        <p class="stat-sublabel">Edappally Zone</p>
+                    </div>
+                    <div class="stat-card stat-purple">
+                        <p class="stat-label">Monthly Trend</p>
+                        <p class="stat-value">-8%</p>
+                        <p class="stat-sublabel">Improvement</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other tabs placeholder -->
+            <div class="tab-content" id="carbon">
+                <div class="card">
+                    <h2>Carbon Sequestration & Green Cover</h2>
+                    <p>Content coming soon...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="ai">
+                <div class="card">
+                    <h2>AI-Powered Predictions</h2>
+                    <p>Content coming soon...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="citizen">
+                <div class="card">
+                    <h2>Citizen Engagement Portal</h2>
+                    <p>Content coming soon...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="governance">
+                <div class="card">
+                    <h2>Governance & Compliance</h2>
+                    <p>Content coming soon...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="footer-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Ernakulam Smart City</h3>
+                    </div>
+                    <p>A prototype system for monitoring air quality, climate adaptation planning, and citizen engagement in Ernakulam City.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Real-time AQI Monitoring</li>
+                        <li><i class="fas fa-check"></i> Ward-wise Pollution Mapping</li>
+                        <li><i class="fas fa-check"></i> AI-driven Predictions</li>
+                        <li><i class="fas fa-check"></i> Citizen Engagement Tools</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Ernakulam Smart City Mission<br>
+                    Environmental Division<br>
+                    <span class="contact-email">airquality@ernakulam.gov.in</span></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ernakulam Smart City. Prototype System for Climate Action.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
